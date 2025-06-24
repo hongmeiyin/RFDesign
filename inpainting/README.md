@@ -99,10 +99,10 @@ E.g. `A25-50,15-25,B1-50` will fuse part of the 'A' chain to part of the 'B'
 chain.
 
 ## Understanding the outputs
-
+# 任何有支架的基序最终都会出现在链A上。如果你包含一个受体链，它将在链B上输出。
 1. The PDB file. Any scaffolded motifs will end up on chain A. If you included
 a receptor chain, that will be output on chain B.
-
+# numpy 查看trb文件，包含lddt, inpaint部分的lddt,
 2. The trb file. This contains metadata about the inpainting run. Open this
 with np.load([File], allow_pickle=True).
     - `lddt`- This is the inpainting network's prediction at how 'good' the
@@ -189,7 +189,7 @@ For evaluation:
 ## FAQs
 
 1. 'How much protein can inpainting inpaint?' 
-
+# 这取决于具体问题，但一般而言，对于超过约60个残基的修复（inpainting），模型会较为困难。如果你有多个需要修复的区域（位于可见结构块之间），那么待修复的蛋白质总量可能会远超这个数字（例如，每段约50个残基时）。
 This depends on the problem, but generally it will struggle with inpainting
 more than around 60 residues. If you have multiple regions to be inpainted
 (between visible blocks), the total amount of protein to be inpainted could be
@@ -197,7 +197,7 @@ quite a lot more than this though (if each segment was say, around 50
 residues).
 
 2. 'I see chain breaks/clashes in my pdb output'
-
+# 修复（inpainting）过程经常失败，这可能是因为在该次运行中提供给网络的长度参数组合无法生成合理的蛋白质结构（至少在修复模式下如此）。不过，这些设计通常会有较低的“inpaint_lddt”平均分，因此如果只保留得分最高的前10%左右的设计，这些结果应该不会存在严重的原子冲突等问题。
 Inpainting often fails, probably because the set of lengths given to the
 network during that run were incompatible with making a good protein (at least
 with inpainting). These designs will generally have a low mean 'inpaint_lddt'
