@@ -111,6 +111,7 @@ with np.load([File], allow_pickle=True).
       unmasked region.
     > 这只是 'lddt' 输出中对应于被修复区域的部分。通常，我们会根据该输出的平均值进行筛选，以获取‘最优’的大约 5-10% 的结果。
     > lddt：指的是 Local Distance Difference Test，是一种用于衡量蛋白质结构预测准确性的评分指标，值通常在 0 到 1（或 0 到 100）之间。数值越高，表示预测越接近真实结构。
+    > take the 'best' ~5-10% of outputs（取最优的约5-10%结果）：在所有预测结果中，只保留 lddt 平均分数最高的大约前 5% 到 10%，作为最可靠的预测结构。
     - `inpaint_lddt` - This is just the part of the 'lddt' output corresponding
       to the inpainted region. Normally, we filter on the mean of this output,
       to take the 'best' ~5-10% of outputs.
