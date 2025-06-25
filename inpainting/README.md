@@ -105,9 +105,12 @@ a receptor chain, that will be output on chain B.
 > numpy 查看trb文件，包含lddt, inpaint部分的lddt,
 2. The trb file. This contains metadata about the inpainting run. Open this
 with np.load([File], allow_pickle=True).
+    > 这是修复网络对输出结构‘好坏’的预测。这是按氨基酸残基计算的，并包括所有未被遮罩的区域
     - `lddt`- This is the inpainting network's prediction at how 'good' the
       output structure is. This is per residue, and includes all of the
       unmasked region.
+    > 这只是 'lddt' 输出中对应于被修复区域的部分。通常，我们会根据该输出的平均值进行筛选，以获取‘最优’的大约 5-10% 的结果。
+    > lddt：指的是 Local Distance Difference Test，是一种用于衡量蛋白质结构预测准确性的评分指标，值通常在 0 到 1（或 0 到 100）之间。数值越高，表示预测越接近真实结构。
     - `inpaint_lddt` - This is just the part of the 'lddt' output corresponding
       to the inpainted region. Normally, we filter on the mean of this output,
       to take the 'best' ~5-10% of outputs.
